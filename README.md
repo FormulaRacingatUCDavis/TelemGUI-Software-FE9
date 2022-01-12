@@ -7,3 +7,21 @@ This program follows the conventions laid out in the [Can Index](https://docs.go
 ## Files
  - testing/csv_generator.py is a python script which randomly generates csv files using the Message class for purposes of testing.
  - testing/message.py implements the Message class.
+
+## Testing
+
+### Generating csv files
+
+The csv generator script is in the Testing directory.
+
+You must pass the file name and line count using the -f and -l arguments.
+
+```
+python csv_generator.py -f <filename> -l <linecount>
+```
+
+Use the -h argument for more information on what these do.
+
+```
+python csv_generatory.py -h
+```

@@ -1,7 +1,6 @@
+import sys
+import argparse
 import random
-from numpy import dtype
-import pandas as pd
-import numpy as np
 from message import Message
 
 def generateCSV(name_file: str, listsize: int) -> None:
@@ -17,4 +16,14 @@ def generateCSV(name_file: str, listsize: int) -> None:
 
 # Program flow starts here
 if __name__ == '__main__':
-    generateCSV('data.csv', 100)
+    # create command line argument parser
+    parser = argparse.ArgumentParser(description="Generate sample telemetry data.")
+    parser.add_argument('-f', '--file', default='data.csv', help="Name of the output file" )
+    parser.add_argument('-l', '--line', default=100, help="Number of lines to generate")
+
+    args = parser.parse_args()
+
+    filename = str(args.file)
+    linecount = int(args.line)
+
+    generateCSV(filename, linecount)
