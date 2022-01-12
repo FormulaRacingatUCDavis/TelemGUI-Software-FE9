@@ -8,7 +8,7 @@ class Message:
         self.buf = list(word for word in payload)
         self.timestamp = dt.datetime.now()
 
-    def str_form(self) -> str:
+    def __str__(self) -> str:
         m = ""
         m += str(hex(self.id)) + ','
         for word in self.buf:
@@ -17,12 +17,6 @@ class Message:
         return m
 
 
-
-# def index(id: int):
-    '''
-
-    '''
-
 if __name__ == '__main__':
     m = Message(17, [1, 2, 3, 4, 5, 6, 7, 8])
-    print(m.str_form())
+    print(m)
