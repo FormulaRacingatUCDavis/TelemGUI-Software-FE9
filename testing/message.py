@@ -31,7 +31,7 @@ class Message:
 
         # Choose random buffer data
         # value_0 = last_value_0 + random.randrange(-1, 1)
-        value_1 = last_value_1 + random.randrange(-10, 10)
+        value_1 = last_value_1 + random.randrange(-100, 100)
         last_value_1 = value_1
         buf = [0] * 8
         buf[0] = 0
