@@ -19,7 +19,6 @@ class Message:
 
     @classmethod
     def rand(cls) -> None:
-        # Choose random message cells
         # telemetry Node CAN IDs
         ids = [0x470, 0x471, 0x472, 0x473, 0x474, 0x475]
         id = random.choice(ids)
