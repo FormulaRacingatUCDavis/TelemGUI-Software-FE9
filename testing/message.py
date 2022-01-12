@@ -3,6 +3,10 @@ import random
 
 start_time = dt.datetime.now().microsecond
 
+# noise values
+# last_value_0 = random.randrange(2147483647)
+last_value_1 = random.randrange(2147483647)
+
 class Message:
     def __init__(self, id: int, payload: list) -> None:
         self.id = id
@@ -20,14 +24,18 @@ class Message:
 
     @classmethod
     def rand(cls) -> None:
+        global last_value_1
         # telemetry Node CAN IDs
         ids = [0x470, 0x471, 0x472, 0x473, 0x475]
         id = random.choice(ids)
 
         # Choose random buffer data
+        # value_0 = last_value_0 + random.randrange(-1, 1)
+        value_1 = last_value_1 + random.randrange(-10, 10)
+        last_value_1 = value_1
         buf = [0] * 8
-        buf[0] = random.randrange(0, 2147483646)
-        buf[1] = random.randrange(buf[0], 2147483647)
+        buf[0] = 0
+        buf[1] = value_1
 
         return cls(id, buf)
 

@@ -22,7 +22,7 @@ def parse_csv_line(line: str) -> Tuple[str, int, str]:
     lower8 = int(fields[2])
     # combine 2 bytes from TCAN CAN message payload of the CSV
     full16 = (upper8 << 8) + lower8
-    timestamp = fields[-1]
+    timestamp = int(fields[-1])
     return (name, full16, timestamp)
     
     
@@ -35,7 +35,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '-f', '--file', default="../testing/data.csv", help="Name of the data file to be processed.")
     parser.add_argument(
-        '-o', '--output', default="out.json", help="Name of the output file."
+        '-o', '--output', default="out.js", help="Name of the output file."
     )
 
     args = parser.parse_args()
@@ -48,7 +48,7 @@ if __name__ == '__main__':
     
     parsed_data = {} # each key represents a CAN message id as a string
                      # which maps to a list of parsed TCAN payload (16-bit int) with timestamps
-    for i, line in enumerate(csv_lines):
+    for line in csv_lines:
         data = parse_csv_line(line.strip())
         # we assume that the csv data is in sorted by timestamp
         id = data[0]
@@ -57,8 +57,25 @@ if __name__ == '__main__':
         payload, timestamp = data[1], data[2]
         parsed_data[id].append((payload, timestamp))
 
+    # change to c3 json format
+    c3_dictionary = {
+        'xs': {},
+        'columns': []
+    }
+    for id, array in parsed_data.items():
+        c3_dictionary['xs'][id] = 'x ' + id
+        payloads = [id]
+        times = ['x ' + id]
+        for pair in array:
+            payloads.append(pair[0])
+            times.append(pair[1])
+        c3_dictionary['columns'].append(payloads)
+        c3_dictionary['columns'].append(times)
+
+    
     # write json
     with open(out_file, 'w') as of:
-        of.write(json.dumps(parsed_data))
+        of.write("json_data = ")
+        of.write(json.dumps(c3_dictionary))
     
     
