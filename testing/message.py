@@ -1,20 +1,21 @@
 import datetime as dt
 import random
 
+start_time = dt.datetime.now().microsecond
 
 class Message:
     def __init__(self, id: int, payload: list) -> None:
         self.id = id
         # create list of 8 bytes to store data in
         self.buf = list(word for word in payload)
-        self.timestamp = dt.datetime.now()
+        self.timestamp = dt.datetime.now().microsecond - start_time
 
     def __str__(self) -> str:
         m = ""
         m += str(hex(self.id)) + ','
         for word in self.buf:
             m += str(word) + ','
-        m += self.timestamp.strftime("%H:%M:%S")
+        m += str(self.timestamp)
         return m
 
     @classmethod

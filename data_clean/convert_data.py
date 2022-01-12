@@ -1,4 +1,5 @@
 import argparse
+import json
 from typing import Tuple
 
 id_map = {
@@ -33,10 +34,14 @@ if __name__ == '__main__':
         description="Convert CAN telemetry data in human readable data.")
     parser.add_argument(
         '-f', '--file', default="../testing/data.csv", help="Name of the data file to be processed.")
+    parser.add_argument(
+        '-o', '--output', default="out.json", help="Name of the output file."
+    )
 
     args = parser.parse_args()
 
     file_name = str(args.file)
+    out_file = str(args.output)
 
     with open(file_name) as file:
         csv_lines = file.readlines()
@@ -52,5 +57,8 @@ if __name__ == '__main__':
         payload, timestamp = data[1], data[2]
         parsed_data[id].append((payload, timestamp))
 
+    # write json
+    with open(out_file, 'w') as of:
+        of.write(json.dumps(parsed_data))
     
     
