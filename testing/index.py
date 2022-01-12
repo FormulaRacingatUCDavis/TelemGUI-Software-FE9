@@ -1,4 +1,5 @@
 import datetime as dt
+import random
 
 
 class Message:
@@ -16,7 +17,20 @@ class Message:
         m += self.timestamp.strftime("%H:%M:%S")
         return m
 
+    @classmethod
+    def rand(cls) -> None:
+        # Choose random message cells
+        # telemetry Node CAN IDs
+        ids = [0x470, 0x471, 0x472, 0x473, 0x474, 0x475]
+        id = random.choice(ids)
 
-if __name__ == '__main__':
-    m = Message(17, [1, 2, 3, 4, 5, 6, 7, 8])
-    print(m)
+        # Choose random buffer data
+        buf = [0] * 8
+        buf[0] = random.randrange(0, 2147483646)
+        buf[1] = random.randrange(buf[0], 2147483647)
+
+        return cls(id, buf)
+
+# if __name__ == '__main__':
+#     m = Message.rand()
+#     print(m)
