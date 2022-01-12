@@ -1,7 +1,6 @@
-import sys
 import argparse
-import random
 from message import Message
+
 
 def generateCSV(name_file: str, listsize: int) -> None:
     '''
@@ -14,12 +13,16 @@ def generateCSV(name_file: str, listsize: int) -> None:
             fn.write(str(Message.rand()))
             fn.write('\n')
 
+
 # Program flow starts here
 if __name__ == '__main__':
     # create command line argument parser
-    parser = argparse.ArgumentParser(description="Generate sample telemetry data.")
-    parser.add_argument('-f', '--file', default='data.csv', help="Name of the output file" )
-    parser.add_argument('-l', '--line', default=100, help="Number of lines to generate")
+    parser = argparse.ArgumentParser(
+        description="Generate sample telemetry data.")
+    parser.add_argument('-f', '--file', default='data.csv',
+                        help="Name of the output file")
+    parser.add_argument('-l', '--line', default=100,
+                        help="Number of lines to generate")
 
     args = parser.parse_args()
 
