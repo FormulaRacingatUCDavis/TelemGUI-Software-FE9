@@ -21,5 +21,8 @@ var chart = c3.generate({
     zoom: {
         enabled: true,
         extent: [1,5]
-    }
+    },
+    subchart: {
+        show: true
+    },
 });
