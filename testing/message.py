@@ -4,8 +4,8 @@ import random
 start_time = dt.datetime.now().microsecond
 
 # noise values
-# last_value_0 = random.randrange(2147483647)
-last_value_1 = random.randrange(2147483647)
+last_value_0 = random.randrange(256)
+last_value_1 = random.randrange(256)
 
 class Message:
     def __init__(self, id: int, payload: list) -> None:
@@ -30,11 +30,11 @@ class Message:
         id = random.choice(ids)
 
         # Choose random buffer data
-        # value_0 = last_value_0 + random.randrange(-1, 1)
-        value_1 = last_value_1 + random.randrange(-100, 100)
+        value_0 = last_value_0
+        value_1 = last_value_1 + random.randrange(-10, 10)
         last_value_1 = value_1
         buf = [0] * 8
-        buf[0] = 0
+        buf[0] = value_0
         buf[1] = value_1
 
         return cls(id, buf)
