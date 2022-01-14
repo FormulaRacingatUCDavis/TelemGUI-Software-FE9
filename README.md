@@ -11,9 +11,9 @@ This program follows the conventions laid out in the [Can Index](https://docs.go
  - node_modules/ and associated html and js files are for experimenting with a web frontend. They may be removed in the future if we decide to go with a different frontend.
 
  ## TODO
- -[x] Write random csv data generator
- -[x] Write csv data parser
- -[ ] Write frontend
+ - [X] Write random csv data generator
+ - [X] Write csv data parser
+ - [ ] Write frontend
     - Python QT framework with PyQtGraph/MatPlotLib
     - Python Flask/Django framework with C3.js/Plotly/Chart.js
     - C# .NET framework with Chart tools (only on .NET 3)
