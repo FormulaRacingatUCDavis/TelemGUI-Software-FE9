@@ -11,12 +11,10 @@ The frontend is still in a very early state, and a lot of it is subject to chang
 
 ### Setup
 
-1. Clone the repo
-2. Open index.html is a live server
-   1. Download live server extension for VSCODE
-   2. Click the go live button in the bottom right corner
-3. The gui will open in your default browser.
-4. There is a default sample data included, but to try other data, go to [#Testing](#testing) to learn how to generate csv and js files.
+1. Visit the github page by going to https://formularacingatucdavis.github.io/TelemGUI-Software-FE9/
+2. Click on the button labeled \[Choose File\]
+3. Find and click your csv file
+   1. Random CSV files can be generated with testing/csv_generator.py
 
 ### Navigation
 
