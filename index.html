@@ -7,22 +7,25 @@
     <title>Telemetry</title>
 
     <!-- Load c3.css -->
-    <link href="/node_modules/c3/c3.css" rel="stylesheet">
-    <link href="/styles.css" rel="stylesheet">
+    <link href="node_modules/c3/c3.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
 
     <!-- Load d3.js and c3.js -->
-    <script src="/node_modules/d3/dist/d3.min.js" charset="UTF-8"></script>
-    <script src="/node_modules/c3/c3.js" ></script>
+    <script src="node_modules/d3/dist/d3.min.js" charset="UTF-8"></script>
+    <script src="node_modules/c3/c3.js" ></script>
 
 </head>
 <body>
     <h1>FRUCD FE9 Telemetry GUI</h1>
     <div id="chart"></div>
-
-    <!-- Load json -->
-    <script src="/testing/out.js"></script>
+    <div>
+        <label for="file">Load CSV:</label>
+        <br>
+        <input type="file" id="fileInput" accept=".csv">
+    </div>
 
     <!-- Load main js -->
-    <script src="/main.js"></script>
+    <script src="csv_parser.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
