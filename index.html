@@ -23,8 +23,19 @@
         <br>
         <input type="file" id="fileInput" accept=".csv">
     </div>
+    <br>
+    <div>
+        <div>Choose Generation Options:
+            <div>
+                Number of lines: <input type="number" id="csvLinesNum" value="1000" min="0" max="10000">
+            </div>
+        </div>
+        <button id="csvGenBtn">Generate CSV</button>
+    </div>
 
     <!-- Load main js -->
+    <script src="can_format.js"></script>
+    <script src="csv_generator.js"></script>
     <script src="csv_parser.js"></script>
     <script src="main.js"></script>
 </body>
