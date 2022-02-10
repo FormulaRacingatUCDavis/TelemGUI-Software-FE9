@@ -9,7 +9,16 @@ def start_port_listening(data_queue):
     # ports added after program start take some time to fully connect
     connected_ports = set(list_ports.comports())
     port_wait_table = {} # table of when to wait until for each connecting port
-    success_response = bytes([69, 69, 69])
+    
+    handshake_message = bytes([0xFF, 0xFF, 0, 0, 0, 0, 0])
+    # In the firmware, the GUI and transciever are expected to send this message
+    # back and forth to each other to establish a connection:
+    # start flag = 0xFF, 0xFF (16 bits);
+    # type = 0 (2 bits); dlc = 0 (6 bits);
+    # xcvrID = 0 (4 bits); msgNum = 0 (12 bits);
+    # no payload (0 bits); checksum = 0 (16 bits);
+    # => 5 bytes of 0s after start flag.
+    
     while True:
         detected_ports = set(list_ports.comports())
         connecting_ports = detected_ports - connected_ports
@@ -29,13 +38,13 @@ def start_port_listening(data_queue):
             print(f"Attempt handshake with {port.name}")
             with Serial(port.name, timeout=0.15, write_timeout=0.15) as ser:
                 try:
-                    ser.write(bytes([0xFF, 0xFF, 0x80, 0x00, 0x80]))
+                    ser.write(handshake_message)
                 except SerialTimeoutException:
                     print(f"Unable to write to {port.name}")
                     continue
-                b = ser.read(3)
+                b = ser.read(7)
                 print(b)
-                if b == success_response:
+                if b == handshake_message:
                     print("Handshake Success.")
                     while port in list_ports.comports():
                         b = ser.read_all()
